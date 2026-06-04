@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>پیام‌رسان | چت لحظه‌ای</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- صفحه ورود/ثبت نام -->
+    <div id="auth-page" class="auth-container">
+        <div class="auth-box">
+            <h1>📱 پیام‌رسان</h1>
+            <p style="color: #666; margin-bottom: 20px;">چت لحظه‌ای ساده و سریع</p>
+            
+            <div id="login-section">
+                <h2>ورود</h2>
+                <input type="text" id="login-username" placeholder="نام کاربری" autocomplete="off">
+                <button onclick="login()">ورود</button>
+                <p>حساب ندارید؟ <a href="#" onclick="showRegister()">ثبت نام کنید</a></p>
+            </div>
+            
+            <div id="register-section" style="display:none">
+                <h2>ثبت نام</h2>
+                <input type="text" id="reg-username" placeholder="نام کاربری" autocomplete="off">
+                <button onclick="register()">ثبت نام</button>
+                <p>قبلاً ثبت نام کردید؟ <a href="#" onclick="showLogin()">وارد شوید</a></p>
+            </div>
+            
+            <div id="auth-message" class="message-box" style="display:none"></div>
+        </div>
+    </div>
+    
+    <!-- صفحه چت -->
+    <div id="chat-page" style="display:none">
+        <div class="app-container">
+            <!-- سایدبار -->
+            <div class="sidebar">
+                <div class="user-info">
+                    <span>👤 <span id="current-username"></span></span>
+                    <button onclick="logout()" class="logout-btn">🚪 خروج</button>
+                </div>
+                <div class="search-box">
+                    <input type="text" id="search-user" placeholder="جستجوی کاربر..." onkeyup="searchUsers()">
+                </div>
+                <div id="users-list" class="users-list">
+                    <div class="loading">در حال بارگذاری...</div>
+                </div>
+            </div>
+            
+            <!-- منطقه چت -->
+            <div class="chat-area">
+                <div id="chat-header" class="chat-header">
+                    🤝 کاربری را انتخاب کنید
+                </div>
+                <div id="messages-container" class="messages-container">
+                    <div class="empty-chat">👈 روی یک کاربر کلیک کنید تا چت شروع شود</div>
+                </div>
+                <div id="typing-indicator" class="typing-indicator"></div>
+                <div class="message-input-area">
+                    <textarea id="message-input" placeholder="پیام خود را بنویسید..." rows="2" onkeypress="handleKeyPress(event)"></textarea>
+                    <button onclick="sendMessage()" id="send-btn">📤 ارسال</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
